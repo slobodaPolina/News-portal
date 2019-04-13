@@ -12,7 +12,6 @@
 	<?php include_once "block_menu.html"; ?>
 
 	<div class="workspace">
-		<div class="page--header">Новости</div>
 			<?php printAllPosts(); ?>
 	</div>
 </body>
