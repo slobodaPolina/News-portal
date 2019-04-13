@@ -2,7 +2,7 @@
 include_once "connectDB.php";
 
 function printAllPosts() {
-    $posts = SQL::SELECT(['title, body'], 'POSTS');
+    $posts = SQL::selectAllPosts();
     foreach ($posts as &$post) {
         printPost($post);
     }
@@ -25,16 +25,8 @@ function insertPost($title, $body) {
   if (!isset($title) || !isset($body))
   		return 'INCORRECT_INPUT';
 
-  $args = array();
-  $args['title'] = '"' . SQL::safeEncodeString($title) . '"';
-  $args['body'] = '"' . SQL::safeEncodeString($body)  . '"';
-
-  if (2 < mb_strlen($args['title']) &&
-  		mb_strlen($args['title']) < 50 &&
-  		2 < mb_strlen($args['body']) &&
-  		mb_strlen($args['body']) < 1024
-  ) {
-  		$result = SQL::INSERT_set('POSTS', $args);
-  }
+  $title = '"' . SQL::safeEncodeString($title) . '"';
+  $body = '"' . SQL::safeEncodeString($body)  . '"';
+  $result = SQL::InsertPost($title, $body);
 }
 ?>
